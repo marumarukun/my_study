@@ -1,0 +1,29 @@
+[project]
+name = "python-pro"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "marumarukun", email = "cheriera.0310@gmail.com" }
+]
+dependencies = [
+    "numpy>=1.24.4",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[project.scripts]
+hello = "python_pro:hello"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/python_pro"]
