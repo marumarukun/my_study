@@ -1,0 +1,30 @@
+[project]
+name = "udemy-fastapi"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "marumarukun", email = "cheriera.0310@gmail.com" }
+]
+dependencies = [
+    "pip>=24.0",
+    "requests>=2.31.0",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[project.scripts]
+hello = "udemy_fastapi:hello"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/udemy_fastapi"]
