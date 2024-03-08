@@ -75,31 +75,32 @@ if page == 'booking':
     booking_response = requests.get('http://127.0.0.1:8000/bookings')
     booking_df = pd.DataFrame(booking_response.json())
     
-    booking_df = booking_df.merge(user_df, on='user_id', how='left')
-    booking_df = booking_df.merge(room_df, on='room_id', how='left')
-    
-    # datetimeを見易くする
-    func_datetime_format = lambda x: datetime.datetime.fromisoformat(x).strftime('%Y-%m-%d %H:%M')
-    booking_df['start_datetime'] = booking_df['start_datetime'].apply(func_datetime_format)
-    booking_df['end_datetime'] = booking_df['end_datetime'].apply(func_datetime_format)
-    
-    # カラムの改名と並び替え
-    booking_df = booking_df.rename(columns={
-        'user_name': 'ユーザー名',
-        'room_name': '会議室名',
-        'booked_num': '予約人数',
-        'start_datetime': '開始時間',
-        'end_datetime': '終了時間',
-        'booking_id': '予約ID'
-    })
-    booking_df = booking_df[
-        ['予約ID', 'ユーザー名', '会議室名', '予約人数', '開始時間', '終了時間']
-        ]
-    
-    
-    
-    st.write('## 予約一覧')
-    st.table(booking_df)
+    if not booking_df.empty:
+        booking_df = booking_df.merge(user_df, on='user_id', how='left')
+        booking_df = booking_df.merge(room_df, on='room_id', how='left')
+        
+        # datetimeを見易くする
+        func_datetime_format = lambda x: datetime.datetime.fromisoformat(x).strftime('%Y-%m-%d %H:%M')
+        booking_df['start_datetime'] = booking_df['start_datetime'].apply(func_datetime_format)
+        booking_df['end_datetime'] = booking_df['end_datetime'].apply(func_datetime_format)
+        
+        # カラムの改名と並び替え
+        booking_df = booking_df.rename(columns={
+            'user_name': 'ユーザー名',
+            'room_name': '会議室名',
+            'booked_num': '予約人数',
+            'start_datetime': '開始時間',
+            'end_datetime': '終了時間',
+            'booking_id': '予約ID'
+        })
+        booking_df = booking_df[
+            ['予約ID', 'ユーザー名', '会議室名', '予約人数', '開始時間', '終了時間']
+            ]
+        
+        
+        
+        st.write('## 予約一覧')
+        st.table(booking_df)
 
     with st.form(key='booking'):
         user_name: str = st.selectbox('ユーザー名', user_dict.keys())
