@@ -119,7 +119,7 @@ X_train, X_test = train_test_split(
 # モデル構築
 arima_fourier_model = auto_arima(
     y=y_train,
-    X=X_train,
+    X=X_train, # Xは大文字だよ
     seasonal=False,
     maxiter=10)
 

@@ -22,6 +22,7 @@ import pandas as pd
 import statsmodels.api as sm
 
 import rpy2
+# Jupyter Notebook上でrpy2拡張機能を有効化し、Python/Rの連携機能を提供する
 get_ipython().run_line_magic('load_ext', 'rpy2.ipython')
 
 import warnings
