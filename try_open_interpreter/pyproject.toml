@@ -1,0 +1,30 @@
+[project]
+name = "try-open-interpreter"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "marumarukun", email = "cheriera.0310@gmail.com" }
+]
+dependencies = [
+    "open-interpreter>=0.2.2",
+    "pip>=24.0",
+]
+readme = "README.md"
+requires-python = ">= 3.10,<4.0"
+
+[project.scripts]
+hello = "try_open_interpreter:hello"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/try_open_interpreter"]
