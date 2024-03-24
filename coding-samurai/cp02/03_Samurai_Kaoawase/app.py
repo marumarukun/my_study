@@ -38,7 +38,7 @@ def shot(reference_image: Image,
     # Message
     header_message = get_samurai_header(state)
     score_message = f"## あなたの {state.samurai_names[state.samurai_index]} 度は {score} 点です"
-    return header_message, score_message, state
+    return header_message, score_message, state, camera_image
 
 with gr.Blocks() as demo:
     gr.Markdown("<h1 align='center'> 🗡️侍顔合わせ👹 </h1>")
@@ -54,6 +54,7 @@ with gr.Blocks() as demo:
             camera_image = gr.Image(label="あなたのカメラ", type="pil", sources=["webcam"], streaming=True) # Gradio Ver4
             # camera_image = gr.Image(label="あなたのカメラ", type="pil", source="webcam", streaming=True) # Gradio Ver3
             button_shot = gr.Button("顔合わせ")
+            capture_image = gr.Image(label="あなたの顔", type="pil")
 
     state = gr.State(logic.GameState())
     gr.Markdown("<div align='right'>Webカメラが必要です。スコアをリセットするには再読み込みしてください</div>")
@@ -64,7 +65,7 @@ with gr.Blocks() as demo:
                         state, [reference_image, reference_header, state])
     button_shot.click(shot, 
                         [reference_image, camera_image, state],
-                        [reference_header, score_message, state])
+                        [reference_header, score_message, state, capture_image])
 
 if __name__ == "__main__":
     demo.launch()
