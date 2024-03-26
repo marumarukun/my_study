@@ -8,7 +8,7 @@ from tqdm import tqdm
 def run_raft(video_path, fps):
     model_path = "../models/raft_things_iter20_480x640.onnx"
     # session = onnxruntime.InferenceSession(model_path)
-    session = onnxruntime.InferenceSession(model_path, providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
+    session = onnxruntime.InferenceSession(model_path, providers=['CoreMLExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'])
 
     # get input/output names
     model_inputs = session.get_inputs()
